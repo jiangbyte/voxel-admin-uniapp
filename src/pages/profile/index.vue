@@ -76,7 +76,7 @@ const displayName = computed(
 
 onShow(() => {
   if (!authStore.isLogin) {
-    uni.reLaunch({ url: '/pages/auth/login/login' })
+    uni.reLaunch({ url: '/pages/auth/login' })
   }
 })
 

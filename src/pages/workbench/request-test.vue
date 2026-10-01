@@ -12,7 +12,7 @@
       <view class="bg-white rounded p-3 mb-3">
         <view class="flex items-center justify-between mb-2">
           <text class="text-sm font-semibold text-gray-700"
-          >GET {{ API_PREFIX }}/me
+          >GET {{ API_PREFIX }}/auth/session/me
           </text
           >
           <u-button
@@ -39,7 +39,7 @@
       <view class="bg-white rounded p-3 mb-3">
         <view class="flex items-center justify-between mb-2">
           <text class="text-sm font-semibold text-gray-700"
-          >GET {{ API_PREFIX }}/sys/dicts/tree
+          >GET {{ API_PREFIX }}/sys/dict/tree
           </text
           >
           <u-button
@@ -166,7 +166,7 @@ async function fetchMe() {
   meResult.value = ''
   try {
     const {http} = await import('@/utils/request')
-    const data = await http.get(`${API_PREFIX}/me`)
+    const data = await http.get(`${API_PREFIX}/auth/session/me`)
     meResult.value = JSON.stringify(data, null, 2)
   } catch (e: any) {
     meResult.value = `错误：${e.message || e}`
@@ -180,7 +180,7 @@ async function fetchDictTree() {
   dictTreeResult.value = ''
   try {
     const {http} = await import('@/utils/request')
-    const data = await http.get(`${API_PREFIX}/sys/dicts/tree`)
+    const data = await http.get(`${API_PREFIX}/sys/dict/tree`)
     const preview = (Array.isArray(data) ? data : [])
         .slice(0, 3)
         .map((n: any) => ({

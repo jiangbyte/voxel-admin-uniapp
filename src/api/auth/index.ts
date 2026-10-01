@@ -5,54 +5,54 @@ import { http } from '@/utils/request'
 
 const prefix = API_PREFIX
 
-export function captcha(params?: any) {
-    return http.get<any>(`${prefix}/captcha`, params, {attachSession: false})
+export function fetchAuthSessionCaptcha() {
+    return http.get<any>(`${prefix}/auth/session/captcha`, undefined, {attachSession: false})
 }
 
-export function passwordKey() {
-    return http.get<any>(`${prefix}/password-key`, undefined, {attachSession: false})
+export function fetchAuthSessionPasswordKey() {
+    return http.get<any>(`${prefix}/auth/session/password-key`, undefined, {attachSession: false})
 }
 
-export function login(data: any) {
-    return http.post<any>(`${prefix}/login`, data, {attachSession: false})
+export function fetchAuthSessionLogin(data: any) {
+    return http.post<any>(`${prefix}/auth/session/login`, data, {attachSession: false})
 }
 
-export function logout() {
-  return http.post<any>(`${prefix}/logout`)
+export function fetchAuthSessionLogout() {
+  return http.post<any>(`${prefix}/auth/session/logout`)
 }
 
-export function me() {
-  return http.get<any>(`${prefix}/me`)
+export function fetchAuthSessionMe() {
+  return http.get<any>(`${prefix}/auth/session/me`)
 }
 
-export function forgotPassword(data: any) {
-    return http.post<any>(`${prefix}/forgot-password`, data, {attachSession: false})
+export function fetchAuthSessionForgotPassword(data: any) {
+    return http.post<any>(`${prefix}/auth/session/forgot-password`, data, {attachSession: false})
 }
 
-export function resetPassword(data: any) {
-    return http.post<any>(`${prefix}/reset-password`, data, {attachSession: false})
+export function fetchAuthSessionResetPassword(data: any) {
+    return http.post<any>(`${prefix}/auth/session/reset-password`, data, {attachSession: false})
 }
 
-export function updateProfile(data: any) {
-  return http.post<any>(`${prefix}/profile/update`, data)
+export function fetchProfileAccountUpdate(data: any) {
+  return http.post<any>(`${prefix}/profile/account/update`, data)
 }
 
-export function updatePassword(data: any) {
-  return http.post<any>(`${prefix}/profile/password/update`, data)
+export function fetchProfileAccountPasswordUpdate(data: any) {
+  return http.post<any>(`${prefix}/profile/account/password/update`, data)
 }
 
-export function updatePhone(data: any) {
-  return http.post<any>(`${prefix}/profile/phone/update`, data)
+export function fetchProfileAccountPhoneUpdate(data: any) {
+  return http.post<any>(`${prefix}/profile/account/phone/update`, data)
 }
 
-export function updateEmail(data: any) {
-  return http.post<any>(`${prefix}/profile/email/update`, data)
+export function fetchProfileAccountEmailUpdate(data: any) {
+  return http.post<any>(`${prefix}/profile/account/email/update`, data)
 }
 
-export function orgInfo() {
+export function fetchProfileOrgInfo() {
   return http.get<any>(`${prefix}/profile/org-info`)
 }
 
-export function uploadAvatar(filePath: string) {
-    return http.upload<any>(`${prefix}/profile/avatar/upload`, filePath)
+export function fetchAuthUploadAvatar(filePath: string) {
+    return http.upload<any>(`${prefix}/profile/account/avatar/upload`, filePath)
 }

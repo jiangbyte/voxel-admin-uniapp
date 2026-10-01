@@ -2,7 +2,7 @@
 
 import { shallowRef } from 'vue'
 
-const DICT_TREE_STORAGE_KEY = 'hei:admin-uniapp:dict-tree'
+const DICT_TREE_STORAGE_KEY = 'voxel:admin-uniapp:dict-tree'
 
 export const dictTreeState = shallowRef<any[]>([])
 
@@ -26,7 +26,7 @@ export async function refreshDict() {
     try {
         const {API_PREFIX} = await import('@/constants/api')
       const { http } = await import('@/utils/request')
-        const data = await http.get<any[]>(`${API_PREFIX}/sys/dicts/tree`)
+        const data = await http.get<any[]>(`${API_PREFIX}/sys/dict/tree`)
       setDictTree(data ?? [])
     } finally {
       refreshDictPromise = null

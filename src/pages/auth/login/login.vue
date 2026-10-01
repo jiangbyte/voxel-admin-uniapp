@@ -78,9 +78,9 @@
 </template>
 
 <script setup lang="ts">
+import { fetchAuthSessionCaptcha } from '@/api/auth'
 import { computed, reactive, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { authApi } from '@/api'
 import { useAuthStore } from '@/stores/auth'
 
 type LoginType = 'ACCOUNT' | 'EMAIL' | 'PHONE'
@@ -149,7 +149,7 @@ onLoad(() => {
 })
 
 async function loadCaptcha() {
-  const captcha = await authApi.captcha({ format: 'png' })
+  const captcha = await fetchAuthSessionCaptcha()
   form.captcha_id = captcha.captcha_id
   captchaImage.value = `data:${captcha.image_type || 'image/png'};base64,${captcha.image_base64}`
 }

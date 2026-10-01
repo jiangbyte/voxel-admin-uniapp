@@ -33,12 +33,11 @@
 </template>
 
 <script setup lang="ts">
+import { fetchProfileAccountUpdate } from '@/api/auth'
 import { reactive, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import Layout from '@/layouts/index.vue'
 import { useAuthStore } from '@/stores/auth'
-import { authApi } from '@/api'
-
 const authStore = useAuthStore()
 const userInfo = authStore.userInfo
 const saving = ref(false)
@@ -51,7 +50,7 @@ const form = reactive({
 
 onShow(() => {
   if (!authStore.isLogin) {
-    uni.reLaunch({ url: '/pages/auth/login/login' })
+    uni.reLaunch({ url: '/pages/auth/login' })
     return
   }
   // 从 store 中刷新 form 数据（裁剪头像后返回需要更新）
@@ -68,7 +67,7 @@ function chooseAvatar() {
     count: 1,
     success: (res) => {
       const path = encodeURIComponent(res.tempFilePaths[0])
-      uni.navigateTo({ url: `/pages/profile/avatar-crop?imagePath=${path}` })
+      uni.navigateTo({ url: `/pages/profile/account/avatar-crop?imagePath=${path}` })
     },
   })
 }
@@ -76,7 +75,7 @@ function chooseAvatar() {
 async function submit() {
   saving.value = true
   try {
-    await authApi.updateProfile({
+    await fetchProfileAccountUpdate({
       nickname: form.nickname,
       name: form.name,
     })

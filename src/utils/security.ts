@@ -1,7 +1,6 @@
 /** Author: Charlie */
 
-import * as authApi from '@/api/auth'
-
+import { fetchAuthSessionPasswordKey } from '@/api/auth'
 type RsaPublicKey = {
   modulus: Uint8Array
   exponent: Uint8Array
@@ -15,7 +14,7 @@ const bigByteMask = BigInt(0xff)
 export async function encryptPasswords<
   T extends Record<string, string | null | undefined>,
 >(fields: T) {
-  const key = await authApi.passwordKey()
+  const key = await fetchAuthSessionPasswordKey()
   const publicKey = parsePublicKey(base64ToBytes(key.public_key))
   const result: Record<string, string | null> = {}
 

@@ -65,9 +65,9 @@
 </template>
 
 <script setup lang="ts">
+import { fetchAuthUploadAvatar } from '@/api/auth'
 import { computed, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { authApi } from '@/api'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
@@ -228,7 +228,7 @@ function confirm() {
       canvasId: 'cropCanvas',
       success: (res) => {
         uni.hideLoading()
-        authApi.uploadAvatar(res.tempFilePath).then(async () => {
+        fetchAuthUploadAvatar(res.tempFilePath).then(async () => {
           await authStore.refreshUserInfo()
           uni.showToast({ title: '成功', icon: 'none' })
           setTimeout(() => goBack(), 1000)

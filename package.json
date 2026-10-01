@@ -1,5 +1,5 @@
 {
-  "name": "hei-admin-uniapp",
+  "name": "voxel-admin-uniapp",
   "version": "1.0.0-beta",
   "scripts": {
     "dev:custom": "uni -p",

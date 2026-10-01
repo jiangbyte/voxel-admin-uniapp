@@ -2,7 +2,7 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import * as authApi from '@/api/auth'
+import { fetchAuthSessionLogin, fetchAuthSessionLogout, fetchAuthSessionMe } from '@/api/auth'
 import { getStorage, setStorage } from '@/utils/storage'
 import { clearDict } from '@/utils/dict'
 import { encryptPasswords } from '@/utils/security'
@@ -52,7 +52,7 @@ export const useAuthStore = defineStore('auth', () => {
     identity_type?: string
   }) {
     const security = await encryptPasswords({ password: payload.password })
-    const response = await authApi.login({
+    const response = await fetchAuthSessionLogin({
       account: payload.account,
       password: security.values.password,
       identity_type: payload.identity_type ?? 'ACCOUNT',
@@ -69,7 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function refreshUserInfo() {
-    const data = await authApi.me()
+    const data = await fetchAuthSessionMe()
     const nextUser: AuthUserInfo = {
       accountId: data.account_id,
       account: data.account,
@@ -106,12 +106,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout() {
     try {
-      await authApi.logout()
+      await fetchAuthSessionLogout()
     } catch {
       // 本地会话清理优先。
     } finally {
       resetSession()
-      uni.reLaunch({ url: '/pages/auth/login/login' })
+      uni.reLaunch({ url: '/pages/auth/login' })
     }
   }
 

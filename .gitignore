@@ -142,3 +142,8 @@ vite.config.ts.timestamp-*
 .vite/
 "src/manifest.json" 
 "src/manifest.json" 
+
+# Env / secrets
+.env
+.env.production
+!.env.example

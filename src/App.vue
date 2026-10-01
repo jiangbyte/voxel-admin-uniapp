@@ -8,7 +8,7 @@ onLaunch(() => {
   const authStore = useAuthStore()
   if (!authStore.isLogin) {
     setTimeout(() => {
-      uni.reLaunch({ url: '/pages/auth/login/login' })
+      uni.reLaunch({ url: '/pages/auth/login' })
     }, 100)
   }
 })
